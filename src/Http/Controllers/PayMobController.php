@@ -14,7 +14,7 @@ class PayMobController extends Controller
      * @param  int  $orderId
      * @return Response
      */
-    public function checkingOut($orderId)
+     public function checkingOut($integration_id, $orderId)
     {
         $order       = config('paymob.order.model', 'App\Order')::find($orderId);
         # code... get order user.
@@ -38,6 +38,7 @@ class PayMobController extends Controller
         }
         $order->update(['paymob_order_id' => $paymobOrder->id]); // save paymob order id for later usage.
         $payment_key = PayMob::getPaymentKeyPaymob( // get payment key
+            $integration_id,
             $auth->token,
             $order->totalCost * 100,
             $paymobOrder->id,
@@ -141,15 +142,15 @@ class PayMobController extends Controller
      * @param  \Illumiante\Http\Request  $request
      * @return  Response
      */
-    public function processedCallback(Request $request)
+     public function processedCallback(Request $request)
     {
         $orderId = $request['obj']['order']['id'];
         $order   = config('paymob.order.model', 'App\Order')::wherePaymobOrderId($orderId)->first();
 
         // Statuses.
-        $isSuccess  = $request['obj']['success'];
-        $isVoided   = $request['obj']['is_voided'];
-        $isRefunded = $request['obj']['is_refunded'];
+        $isSuccess  = filter_var($request['success'], FILTER_VALIDATE_BOOLEAN);
+        $isVoided  = filter_var($request['is_voided'], FILTER_VALIDATE_BOOLEAN);
+        $isRefunded  = filter_var($request['is_refunded'], FILTER_VALIDATE_BOOLEAN);
 
         if ($isSuccess && !$isVoided && !$isRefunded) { // transcation succeeded.
             $this->succeeded($order);
