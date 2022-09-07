@@ -41,7 +41,7 @@ class PayMobController extends Controller
             $integration_id,
             $auth->token,
             $order->totalCost * 100,
-            $paymobOrder->id,
+            $order->id,
             // For billing data
             $user->email, // optional
             $user->firstname, // optional
