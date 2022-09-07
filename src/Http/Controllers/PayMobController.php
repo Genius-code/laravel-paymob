@@ -14,7 +14,7 @@ class PayMobController extends Controller
      * @param  int  $orderId
      * @return Response
      */
-     public function checkingOut($integration_id, $orderId)
+    public function checkingOut($integration_id, $orderId)
     {
         $order       = config('paymob.order.model', 'App\Order')::find($orderId);
         # code... get order user.
@@ -142,7 +142,7 @@ class PayMobController extends Controller
      * @param  \Illumiante\Http\Request  $request
      * @return  Response
      */
-     public function processedCallback(Request $request)
+    public function processedCallback(Request $request)
     {
         $orderId = $request['obj']['order']['id'];
         $order   = config('paymob.order.model', 'App\Order')::wherePaymobOrderId($orderId)->first();
