@@ -18,15 +18,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | PayMob username and password
+    | PayMob Api Key
     |--------------------------------------------------------------------------
     |
-    | This is your PayMob username and password to make auth request.
+    | This is your PayMob apikey to make auth request.
     |
     */
 
-    'username' => '',
-    'password' => '',
+    'api_key' => '',
+
 
     /*
     |--------------------------------------------------------------------------
