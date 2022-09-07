@@ -28,15 +28,4 @@ return [
     'api_key' => '',
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | PayMob integration id and iframe id
-    |--------------------------------------------------------------------------
-    |
-    | This is your PayMob integration id and iframe id.
-    |
-    */
-
-    'integration_id' => '',
-    'iframe_id' => '',
 ];
